@@ -8,10 +8,10 @@ def create_deidentified_folder (source_folder):
         return
 
     parent = "/home/sriram/Documents/Test Folder"
-    copy_path = "{parent}/Test2"
+    copy_path = f"{parent}/Test2"
 
     try:
-        shutil.copytree(source_folder, parent)
+        shutil.copytree(source_folder, copy_path)
         print(f"Directory copied from '{source_folder}' to '{copy_path}'")
     except FileExistsError:
         print(f"Destination directory '{copy_path}' already exists.")
