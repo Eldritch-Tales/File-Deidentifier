@@ -8,7 +8,7 @@ def create_deidentified_folder (source_folder):
         return
 
     parent = "/home/sriram/Documents/Test Folder"
-    copy_path = "{parent}/Copy"
+    copy_path = "{parent}/Test2"
 
     try:
         shutil.copytree(source_folder, parent)
