@@ -7,7 +7,7 @@ def create_deidentified_folder (source_folder):
         print(f"The source folder '{source_folder} does not exist")
         return
 
-    parent = "/home/Documents/Test Folder"
+    parent = "/home/sriram/Documents/Test Folder"
     copy_path = "{parent}/Copy"
 
     try:
