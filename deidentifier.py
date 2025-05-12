@@ -17,3 +17,6 @@ def create_deidentified_folder (source_folder):
         print(f"Destination directory '{copy_path}' already exists.")
     except Exception as e:
         print(f"An error occurred: {e}")
+
+orig_dir = input("What is the path of the folder to deidentify?")
+create_deidentified_folder(orig_dir)
