@@ -27,9 +27,11 @@ def create_deidentified_folder (source_folder):
 
 # Deletes all files named 'Communication Log' within input directory
 def delete_communication_log(directory):
+    # Iterates through all file and directories under the input path
     for file_path in directory.rglob("*"):
         if file_path.is_file() and file_path.stem == "Communication Log":
             try:
+                # Deletes the file
                 file_path.unlink()
                 print(f"Deleted: {file_path}")
             except Exception as e:
