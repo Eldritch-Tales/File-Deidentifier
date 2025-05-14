@@ -29,13 +29,21 @@ def create_deidentified_folder (source_folder):
 def delete_files_change_name(directory):
     # Iterates through all file and directories under the input path
     for file_path in directory.rglob("*"):
-        if file_path.is_file() and file_path.stem == "Communication Log":
+        if file_path.is_file() and file_path.stem == "Remote Monitoring Chat":
             try:
                 # Deletes the file
                 file_path.unlink()
                 print(f"Deleted: {file_path}")
             except Exception as e:
                 print(f"Failed to delete {file_path}: {e}")
+                
+        elif file_path.name.lower == "screenshots" or file_path.name.lower == "reports":
+            try:
+                if file_path.is_dir():
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                print(f"Failed to delete {file_path}: {e}")
+
         elif file_path.is_file() and file_path.suffix == ".iom":
             try: 
                 trim_name()
