@@ -44,7 +44,7 @@ def delete_files_change_name(directory):
 
 def trim_name(file_path):
     # Extract the part that matches 3 letters + underscore + 6 digits
-    match = re.match(r"([A-Za-z]{3}_\d{6})", file_path.stem)
+    match = re.match(r"(\d{6}~[A-Za-z]{3})", file_path.stem)
     if not match:
         print(f"Filename '{file_path.name}' does not match expected pattern.")
         return
