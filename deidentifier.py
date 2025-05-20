@@ -46,22 +46,40 @@ def delete_files_change_name(directory):
 
         elif file_path.is_file() and file_path.suffix == ".iom":
             try: 
-                trim_name()
+                trim_name(file_path)
+            except Exception as e:
+                print(f"Failed to rename {file_path}: {e}")
+
+        elif file_path.is_dir() and re.match(r"(\d{6}-[A-Za-z]{3})", file_path.name):
+            try:
+                trim_name(file_path)
             except Exception as e:
                 print(f"Failed to rename {file_path}: {e}")
 
 def trim_name(file_path):
-    # Extract the part that matches 3 letters + underscore + 6 digits
-    match = re.match(r"(\d{6}-[A-Za-z]{3})", file_path.stem)
-    if not match:
-        print(f"Filename '{file_path.name}' does not match expected pattern.")
-        return
+    if file_path.is_file():
+        # Extract the part that matches 6 digits + dash + 3 letters
+        match = re.match(r"(\d{6}-[A-Za-z]{3})", file_path.stem)
+        if not match:
+            print(f"Filename '{file_path.name}' does not match expected pattern.")
+            return
 
-    new_stem = match.group(1)
-    new_file_path = file_path.with_name(new_stem + file_path.suffix)
+        new_stem = match.group(1)
+        new_file_path = file_path.with_name(new_stem + file_path.suffix)
 
-    file_path.rename(new_file_path)
-    print(f"Renamed to: {new_file_path}")
+        file_path.rename(new_file_path)
+        print(f"Renamed to: {new_file_path}")
+
+    elif file_path.is_dir():
+        match = re.match(r"(\d{6}-[A-Za-z]{3})", file_path.name)
+        if not match:
+            print(f"Directory '{file_path.name}' does not match expected pattern.")
+            return
+        
+        new_name = match.group(1)
+        new_path = file_path.with_name("{new_name}")
+        file_path.rename(new_path)
+        print(f"Renamed to: {new_path}")
 
 
 orig_dir = input("What is the path of the folder to deidentify?")
